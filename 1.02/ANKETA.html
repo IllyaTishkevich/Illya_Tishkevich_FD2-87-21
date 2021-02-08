@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework N.03</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+    'use strict';
+
+    function getName() {
+        let validate = false;
+        let name = '';
+        while (!validate) {
+            name = prompt('Введите Ваше ФИО',[name]);
+            if(typeof(name) === 'string') {
+                let fio = name.trim().split(' ');
+                if (fio.length === 3
+                    && isContainNumber(name)
+                ) {
+                    validate = true;
+                }
+            }
+        }
+
+        return name;
+    }
+
+    function getAge() {
+        let validate = false;
+        let age = 0;
+        while (!validate) {
+            let ageString = prompt('укажите Ваш возраст в годах.', [age]);
+            age = parseInt(ageString);
+            if(Number(ageString) === age && age > 0) {
+                validate = true;
+            }
+
+        }
+
+        return age;
+    }
+
+    function getMale() {
+        return  confirm('ваш пол - мужской?');
+    }
+
+    function isContainNumber(string) {
+        let result = false;
+        if(typeof(string) === 'string') {
+            result = parseInt(string.replace( /\D/g, '')) ? false : true;
+        }
+
+        return result;
+    }
+
+    function checkPensioner(age, isMale) {
+        let result = false;
+        if(typeof (isMale) === 'boolean') {
+            if (isMale) {
+                result = !(age < 65);
+            } else {
+                result = !(age < 60);
+            }
+        }
+
+        return result;
+    }
+
+    const name = getName();
+    const age = getAge();
+    const isMale = getMale();
+    const isPensioner = checkPensioner(age, isMale);
+    const resultString = `
+        ваше ФИО: ${name}
+        ваш возраст в годах: ${age}
+        ваш возраст в днях: ${age * 365}
+        через 5 лет вам будет: ${age + 5}
+        ваш пол: ${isMale ? 'мужской' : 'женский'}
+        вы на пенсии: ${isPensioner ? 'да' : 'нет'}`;
+
+    alert(resultString);
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A2+</title>
+</head>
+<body>
+    <script type="text/javascript">
+        'use strict';
+
+        function myTrim(string) {
+            let result = '';
+            let i = 0;
+
+            while (string.charAt(i) === ' ' && i < string.length)
+            {
+                i++;
+            }
+            let start = i;
+
+            i = string.length - 1;
+            while (string.charAt(i) === ' ' && i >= 0)
+            {
+                i--;
+            }
+            let end = i + 1;
+
+            result = string.substring(start, end);
+            return result;
+        }
+
+        let string = prompt('введите строку');
+        console.log(`X${myTrim(string)}X`);
+    </script>
+</body>
+</html>

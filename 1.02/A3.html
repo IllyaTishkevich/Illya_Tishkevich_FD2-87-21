@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A3+</title>
+</head>
+<body>
+<script type="text/javascript">
+    'use strict';
+
+    function isPalindrome(string) {
+        let result = true;
+
+        string = string.toLowerCase();
+        string = string.replace('ё', 'е').replace('ъ', '').replace('ь', '').replace(/[^a-zа-яё\d]/g, '');
+         for (let i = 0; i < string.length; i++) {
+             let l = string.length - i - 1;
+             if(string.charAt(i) !== string.charAt(l)) {
+                 return  false;
+             }
+         }
+
+        return result;
+    }
+</script>
+</body>
+</html>
