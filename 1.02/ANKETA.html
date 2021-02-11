@@ -25,6 +25,7 @@
         Должен быть контроль корректности вводимых пользователем данных (например, фамилия не должна быть пустой, возраст должен быть корректной цифрой и т.д.).
         Оператор alert в коде должен использоваться ровно один раз.
     </p>
+    <button onclick="run()">Run</button>
 </body>
 <script type="text/javascript">
     'use strict';
@@ -88,11 +89,12 @@
         return result;
     }
 
-    const name = getName();
-    const age = getAge();
-    const isMale = getMale();
-    const isPensioner = checkPensioner(age, isMale);
-    const resultString = `
+    function run() {
+        const name = getName();
+        const age = getAge();
+        const isMale = getMale();
+        const isPensioner = checkPensioner(age, isMale);
+        const resultString = `
         ваше ФИО: ${name}
         ваш возраст в годах: ${age}
         ваш возраст в днях: ${age * 365}
@@ -100,6 +102,7 @@
         ваш пол: ${isMale ? 'мужской' : 'женский'}
         вы на пенсии: ${isPensioner ? 'да' : 'нет'}`;
 
-    alert(resultString);
+        alert(resultString);
+    }
 </script>
 </html>
