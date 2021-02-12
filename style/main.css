@@ -1,0 +1,33 @@
+body {
+    background-color: cadetblue;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    color: #2f3ff1;
+}
+
+a:visited {
+    color: #2f3ff1;
+}
+
+.title {
+    font-style: oblique;
+}
+
+.main-content {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    min-height: 100vh;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.signature {
+    text-align: right;
+}
