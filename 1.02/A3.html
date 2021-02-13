@@ -20,9 +20,10 @@
                 - пробелы;<br>
                 - знаки препинания;<br>
                 - мягкие и твёрдые знаки;<br>
-                - разница между буквами ""е"" и ""ё"".<br>
+                - разница между буквами "е" и "ё".<br>
             </p>
             <p>имя функции: isPalindrome(string)</p>
+            <button onclick="run()">Run</button>
         </div>
         <div class="signature">
             Тишкевич Илья. группа:FD2-87-21
@@ -44,6 +45,12 @@
          }
 
         return result;
+    }
+
+    function run() {
+        let string = prompt('Введите строку')
+        const result = isPalindrome(string) ? 'строка полиндром' : 'строка не полинром';
+        alert(result)
     }
 </script>
 </body>
