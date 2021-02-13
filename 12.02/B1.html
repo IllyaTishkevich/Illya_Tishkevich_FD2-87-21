@@ -29,7 +29,8 @@
 
         function calcCenture(year)
         {
-            return parseInt(year / 100) + ((year % 100) / (year % 100));
+            const argument = (year % 100) / (year % 100) || 0;
+            return parseInt(year / 100) + argument;
         }
 
         function run() {
