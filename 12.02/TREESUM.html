@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework N.05</title>
+    <link rel="stylesheet" href="./../style/main.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="title">
+            <h1>Домашнее задание TREESUM</h1>
+        </div>
+        <div class="content">
+            <p>
+                Разработать «чистую» функцию treeSum, которая получает массив, элементы которого могут быть числами или снова массивами, и так до любого уровня.<br>
+                Функция должна рассчитать и вернуть сумму всех числовых элементов массива со всех уровней.<br>
+                При написании функции не описывать каких-либо вложенных в неё функций.<br>
+                Проверить работу функции можно на следующем массиве (сумма 50):<br>
+                <pre>
+                    [ 5, 7,
+                    [ 4, [2], 8, [1,3], 2 ],
+                    [ 9, [] ],
+                    1, 8
+                    ]
+                </pre>
+            </p>
+            <button onclick="run()">Run</button>
+        </div>
+        <div class="signature">
+            Тишкевич Илья. группа:FD2-87-21
+        </div>
+    </div>
+<script type="text/javascript">
+    'use strict';
+    const dataArray = [5,7,[ 4,[2], 8,[1,3], 2 ],[9,[]],1,8]
+
+    function treeSum(arr) {
+        let sum = 0;
+        if(Array.isArray(arr)) {
+            for (let i = 0; i < arr.length; i++) {
+                sum += arrSum(arr[i]);
+            }
+        } else {
+            sum = Number(arr);
+        }
+
+        return sum;
+    }
+
+    function run() {
+        alert(treeSum(dataArray))
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B1+</title>
+    <link rel="stylesheet" href="./../style/main.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="title">
+            <h1>Домашнее задание B1+</h1>
+        </div>
+        <div class="content">
+            <p>
+                Разработать чистую функцию, получающую год, и возвращающую век, к которому относится данный год.<br>
+                (Например, 1980 год — 20 век, 2000 год — 20 век, 2001 год — 21 век.)<br>
+                Функция не должна использовать if либо условную операцию, только оператор return.<br>
+                Спросить у пользователя год. Отобразить пользователю соответствующий году век.<br>
+            </p>
+            <button onclick="run()">Run</button>
+        </div>
+        <div class="signature">
+            Тишкевич Илья. группа:FD2-87-21
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+
+        function calcCenture(year)
+        {
+            return parseInt(year / 100) + ((year % 100) / (year % 100));
+        }
+
+        function run() {
+            const year = prompt('введите год');
+            alert(calcCenture(year) + ' век')
+        }
+    </script>
+</body>
+</html>
