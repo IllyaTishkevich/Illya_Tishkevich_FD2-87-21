@@ -38,7 +38,7 @@
         let sum = 0;
         if(Array.isArray(arr)) {
             for (let i = 0; i < arr.length; i++) {
-                sum += arrSum(arr[i]);
+                sum += treeSum(arr[i]);
             }
         } else {
             sum = Number(arr);
