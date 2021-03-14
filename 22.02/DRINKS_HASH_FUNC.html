@@ -81,8 +81,8 @@
             }
         }
 
-        function DrinksHashClass() {
-            this.hashStorage = new HashStorageFunc();
+        function DrinksHashClass(drinkStorage) {
+            this.hashStorage = drinkStorage;
 
             this.addDrink = function() {
                 let name = prompt('введите название напитка.');
@@ -119,7 +119,8 @@ ${drink.recept}`);
             }
         }
 
-        const DrinkHash = new DrinksHashClass();
+        const drinkStorage = new HashStorageFunc();
+        const DrinkHash = new DrinksHashClass(drinkStorage);
 
         document.getElementById('setDrink').addEventListener('click', function() {
             DrinkHash.addDrink()

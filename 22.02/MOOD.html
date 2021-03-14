@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOOD</title>
+    <link rel="stylesheet" href="./../style/main.css">
+</head>
+<body>
+<div class="main-content">
+    <div class="title">
+        <h1>Домашнее задание MOOD</h1>
+    </div>
+    <div class="content">
+        <p>
+            результат в консоли.
+        </p>
+        <button onclick="run()">Run</button>
+    </div>
+    <div class="signature">
+        Тишкевич Илья. группа:FD2-87-21
+    </div>
+</div>
+<script type="text/javascript">
+    'use strict';
+    function randomDiap(n,m) {
+        return Math.floor(Math.random()*(m-n+1))+n;
+    }
+
+    function mood(colorsCount) {
+        var colors=[ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый' ];
+        let selectColors = {};
+        console.log( 'цветов: ' + colorsCount );
+        while (Object.keys(selectColors).length != colorsCount) {
+            var n=randomDiap(1,7);
+            let temp = colors[n];
+            selectColors[temp] = temp;
+        }
+
+        for(let elem in selectColors) {
+            console.log(elem);
+        }
+
+    }
+
+    function run() {
+        mood(3);
+    }
+</script>
+</body>
+</html>
