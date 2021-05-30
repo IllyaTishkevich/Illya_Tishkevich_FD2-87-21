@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework N.07</title>
+    <link rel="stylesheet" href="./../style/main.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="title">
+            <h1>Домашнее задание VOWELS</h1>
+        </div>
+        <div class="content">
+            <p>Написать «чистую» функцию для эффективного подсчёта количества русских гласных букв в строке.<br>
+                Регулярные выражения (кто умеет) не использовать.<br>
+                Спросить у пользователя строку. Вывести в консоль количество русских гласных букв в ней.<br>
+            </p>
+            <button onclick="runForEach()">Run with forEach</button>
+            <button onclick="runFilter()">Run with filter</button>
+            <button onclick="runReduce()">Run with reduce</button>
+        </div>
+        <div class="signature">
+            Тишкевич Илья. группа:FD2-87-21
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        const vowels = ['а', 'у', 'о', 'ы', 'и', 'э', 'я', 'ю', 'ё', 'е'];
+
+
+        function countVowelsForEach(string, vowels)
+        {
+            let result = {};
+            let stringArr = string.split('');
+            stringArr.forEach(function (elem) {
+                if(vowels.includes(elem)) {
+                    result[elem] = result[elem] ? result[elem] + 1 : 1;
+                }
+            })
+
+            return result;
+        }
+
+        function countVowelsFilter(string, vowels)
+        {
+            let result = {};
+            let stringArr = string.split('');
+            let vowelsArray = stringArr.filter(function (elem) {
+                return vowels.includes(elem);
+            })
+
+            vowelsArray.forEach(function (elem) {
+                result[elem] = result[elem] ? result[elem] + 1 : 1;
+            })
+
+
+            return result;
+        }
+
+        function countVowelsReduce(string, vowels)
+        {
+            let result = {};
+            let stringArr = string.split('');
+            result = stringArr.reduce(function(arr, elem) {
+                if(vowels.includes(elem)) {
+                    arr[elem] = (arr[elem] || 0) + 1;
+                }
+                return arr;
+            }, {});
+
+            return result;
+        }
+
+        function createResultMessage(string, array) {
+            let message = 'в строке "' + string + '" символы встречаются ';
+            for (let key in array) {
+                message += `
+                '${key}' ${array[key]} ${array[key] == 1 || array[key] > 4 ? 'раз' : 'раза'}`;
+                console.log(key+'='+array[key]);
+            }
+
+            return message+'.';
+        }
+
+        function runForEach() {
+            const string = prompt('введите строку');
+            const volwelsCount = countVowelsForEach(string, vowels);
+            alert(createResultMessage(string, volwelsCount));
+        }
+
+        function runFilter() {
+            const string = prompt('введите строку');
+            const volwelsCount = countVowelsFilter(string, vowels);
+            alert(createResultMessage(string, volwelsCount));
+        }
+
+        function runReduce() {
+            const string = prompt('введите строку');
+            const volwelsCount = countVowelsReduce(string, vowels);
+            alert(createResultMessage(string, volwelsCount));
+        }
+    </script>
+</body>
+</html>

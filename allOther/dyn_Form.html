@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DYN_FORM</title>
+    <link rel="stylesheet" href="./../style/main.css">
+</head>
+<body>
+<div class="main-content">
+    <div class="title">
+        <h1>Домашнее задание DYN_FORM</h1>
+    </div>
+    <div class="content">
+        <input type=button value='formDef1' onclick='run(formDef1)'>
+        <input type=button value='formDef2' onclick='run(formDef2)'>
+    </div>
+    <div id="field">
+
+    </div>
+    <div class="signature">
+        Тишкевич Илья. группа:FD2-87-21
+    </div>
+</div>
+<script type="text/javascript">
+    'use strict';
+    const formDef1 = [
+        {label:'Название сайта:',kind:'longtext',name:'sitename'},
+        {label:'URL сайта:',kind:'longtext',name:'siteurl'},
+        {label:'Посетителей в сутки:',kind:'number',name:'visitors'},
+        {label:'E-mail для связи:',kind:'shorttext',name:'email'},
+        {label:'Рубрика каталога:',kind:'combo',name:'division',
+            variants:[{text:'здоровье',value:1},{text:'домашний уют',value:2},{text:'бытовая техника',value:3}]},
+        {label:'Размещение:',kind:'radio',name:'payment',
+            variants:[{text:'бесплатное',value:1},{text:'платное',value:2},{text:'VIP',value:3}]},
+        {label:'Разрешить отзывы:',kind:'check',name:'votes'},
+        {label:'Описание сайта:',kind:'memo',name:'description'},
+        {label:'Опубликовать:',kind:'submit'},
+    ];
+    const formDef2 = [
+            {label:'Фамилия:',kind:'longtext',name:'lastname'},
+            {label:'Имя:',kind:'longtext',name:'firstname'},
+            {label:'Отчество:',kind:'longtext',name:'secondname'},
+            {label:'Возраст:',kind:'number',name:'age'},
+            {label:'Зарегистрироваться:',kind:'submit'},
+        ];
+
+    function run(arr) {
+        field.innerHTML = '';
+        const form = document.createElement('form');
+        form.style.display = 'inline-grid';
+        form.action = 'https://fe.it-academy.by/TestForm.php';
+        field.append(form);
+        arr.forEach(function (elem) {
+            if(elem.label != undefined) {
+                let input;
+                const div = document.createElement('div');
+                const span = document.createElement('span');
+                span.innerHTML = elem.label;
+                switch (elem.kind) {
+                    case ('longtext') :
+                        input = document.createElement('input');
+                        input.name = elem.name;
+                        input.type = 'text';
+                        input.style.width = '453px';
+                        div.append(span);
+                        div.append(input);
+                        break;
+                    case ('number') :
+                        input = document.createElement('input');
+                        input.name = elem.name;
+                        input.type = 'text';
+                        input.style.width = '80px';
+                        div.append(span);
+                        div.append(input);
+                        break;
+                    case ('shorttext') :
+                        input = document.createElement('input');
+                        input.name = elem.name;
+                        input.type = 'text';
+                        input.style.width = '200px';
+                        div.append(span);
+                        div.append(input);
+                        break;
+                    case ('combo') :
+                        input = document.createElement('select');
+                        input.name = elem.name;
+                        // input.type = 'select';
+                        elem.variants.forEach(function (option) {
+                            const opt = document.createElement('option');
+                            opt.value = option.value
+                            opt.innerText = option.text;
+                            input.append(opt);
+                        })
+                        div.append(span);
+                        div.append(input);
+                        break;
+                    case ('radio') :
+                        div.append(span);
+                        elem.variants.forEach(function (option) {
+                            const input = document.createElement('input');
+                            const span = document.createElement('span');
+                            span.innerText = option.text;
+                            input.type = 'radio';
+                            input.name = elem.name;
+                            input.value = option.value
+                            div.append(span);
+                            div.append(input);
+                        })
+                        break;
+                    case ('check') :
+                        input = document.createElement('input');
+                        input.name = elem.name;
+                        input.type = 'checkbox';
+                        div.append(span);
+                        div.append(input);
+                        break;
+                    case ('memo') :
+                        input = document.createElement('textarea');
+                        input.name = elem.name;
+                        input.style.width = '600px';
+                        input.style.height = '50px';
+                        div.append(span);
+                        div.append(input);
+                        break;
+                    case ('submit') :
+                        input = document.createElement('input');
+                        input.type = 'submit';
+                        input.value = elem.label;
+                        div.append(input);
+                        break;
+                }
+                form.append(div);
+            } else {
+
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DRINKS_HASH_FUNC</title>
+    <link rel="stylesheet" href="./../style/main.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="title">
+            <h1>Домашнее задание DRINKS_HASH_FUNC</h1>
+        </div>
+        <div class="content">
+            <p>
+                1.<br>
+                Разработать класс HashStorageFunc в функциональном стиле (т.е. функцию-конструктор) для хранения в хэше произвольных пар ключ-значение.<br>
+                Ключ может быть любой строкой; значение может иметь любой тип, в том числе векторный (хэш, массив и т.д.)<br>
+                Класс должен иметь следующий интерфейс (т.е. иметь следующие публичные методы):<br>
+                <li>addValue(key,value) — сохраняет указанное значение под указанным ключом;</li>
+                <li>getValue(key) — возвращает значение по указанному ключу либо undefined;</li>
+                <li>deleteValue(key) — удаляет значение с указанным ключом, возвращает true если значение было удалено и false если такого значения не было в хранилище;</li>
+                <li>getKeys() — возвращает массив, состоящий из одних ключей.</li>
+                Класс должен быть чистым (не должен использовать никаких глобальных переменных, не, должен «пачкать экран»).<br>
+                Класс должен быть универсальным, т.е. не зависеть ни от структуры хранимых данных, ни от способа их последующего использования (в т.ч. не должен содержать никаких ссылок на DOM, т.к. может использоваться и вообще без веб-страницы).<br>
+                2.<br>
+                Создать объект drinkStorage класса HashStorageFunc для хранения рецептов напитков.<br>
+                Ключом является название напитка; значением — информация о напитке (алкогольный напиток или нет, строка с рецептом приготовления и т.д. по желанию).<br>
+                3.<br>
+                Разработать веб-страницу для работы с хранилищем рецептов напитков.<br>
+                На странице должны быть кнопки:<br>
+                <li>«ввод информации о напитке» — последовательно спрашивает название напитка, алкогольный он или нет, рецепт его приготовления; сохраняет информацию о напитке в хранилище.</li>
+                <li>«получение информации о напитке» — спрашивает название напитка и выдаёт (на страницу, в консоль или в alert) либо информацию о нём (по примеру, приведённому ниже), либо сообщение об отсутствии такого напитка в хранилище.</li>
+                <li>«удаление информации о напитке» — спрашивает название напитка и удаляет его из хранилища (если он там есть) с выдачей соответствующего сообщения в информационное окно.</li>
+                <li>«перечень всех напитков» — выдаёт в информационное окно перечень всех напитков из хранилища (только названия).</li>
+                <br>
+                Пример информации о напитке:<br>
+                <br>
+                напиток Маргарита<br>
+                алкогольный: да<br>
+                рецепт приготовления:<br>
+                продукт, продукт... смешать...<br>
+            </p>
+            <p>
+                <button id="setDrink">ввод информации о напитке</button>
+            </p>
+            <p>
+                <button id="getDrink">получение информации о напитке</button>
+            </p>
+            <p>
+                <button id="delDrink">удаление информации о напитке</button>
+            </p>
+            <p>
+                <button id="getDrinksList">перечень всех напиткове</button>
+            </p>
+        </div>
+        <div class="signature">
+            Тишкевич Илья. группа:FD2-87-21
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+
+        class HashStorageClass {
+            constructor() {
+                this.data = {};
+            }
+            addValue(key,value) {
+                data[key] = value;
+            }
+
+            getValue(key) {
+                return data[key];
+            }
+
+            deleteValue(key) {
+                if(key in data) {
+                    return (delete data[key]);
+                } else {
+                    return false;
+                }
+            }
+
+            getKeys() {
+                return Object.keys(data);
+            }
+        }
+
+        class DrinksHashClass {
+            constructor(drinkStorage) {
+                this.hashStorage = drinkStorage;
+            }
+
+            addDrink() {
+                let name = prompt('введите название напитка.');
+                let isAlco = confirm('напиток алкогольный?');
+                let recept = prompt('введите рецепт.');
+                this.hashStorage.addValue(name, {
+                    name: name,
+                    isAlco: isAlco,
+                    recept: recept
+                })
+            }
+
+            printDrinkInfo() {
+                let key = prompt('введите название напитка.');
+                alert(this.getDrinkInfo(key));
+            }
+
+            getDrinkInfo(key) {
+                let drink = this.hashStorage.getValue(key);
+
+                return(`напиток ${drink.name}
+алкогольный: ${drink.isAlco ? 'да' : 'нет'}
+рецепт приготовления:
+${drink.recept}`);
+            }
+
+            delDrinkItem() {
+                let key = prompt('введите название напитка.');
+                this.hashStorage.deleteValue(key);
+            }
+
+            printDrinkList() {
+                alert(this.hashStorage.getKeys().join(', '));
+            }
+        }
+
+        const drinkStorage = new HashStorageClass();
+        const DrinkHash = new DrinksHashClass(drinkStorage);
+
+        document.getElementById('setDrink').addEventListener('click', function() {
+            DrinkHash.addDrink()
+        });
+
+        document.getElementById('getDrink').addEventListener('click', function() {
+            DrinkHash.printDrinkInfo()
+        });
+
+        document.getElementById('delDrink').addEventListener('click', function() {
+            DrinkHash.delDrinkItem();
+        });
+
+        document.getElementById('getDrinksList').addEventListener('click', function() {
+            DrinkHash.printDrinkList();
+        });
+    </script>
+</body>
+</html>
